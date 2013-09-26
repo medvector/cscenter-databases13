@@ -38,4 +38,10 @@ public class Entry {
         }
         return new Entry(builder.toString(), telephone);
     }
+
+    @Override
+    public String toString() {
+        return "fullName='" + fullName + '\'' +
+                ", telephoneNumber='" + telephoneNumber + '\'';
+    }
 }
