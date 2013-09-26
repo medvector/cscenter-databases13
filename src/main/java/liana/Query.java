@@ -36,4 +36,30 @@ public class Query {
     public Entry getEntry() {
         return entry;
     }
+
+    public static Query parse(String line) {
+        String[] tokens = line.split(" ", 3);
+        Type queryType = null;
+        for (Type type : Type.values()) {
+            if (type.name().equalsIgnoreCase(tokens[0])) {
+                queryType = type;
+            }
+        }
+        if (queryType == null) {
+            throw new IllegalArgumentException("Wrong operation. Try use" +
+                    " add, delete, update, get");
+        }
+        String queryKey = tokens[1];
+        if (queryType == Type.UPDATE || queryType == Type.ADD) {
+            if (tokens.length < 3) {
+                throw  new IllegalArgumentException("Entry is missing");
+            }
+            return new Query(queryType, queryKey, Entry.parse(tokens[2]));
+        }
+        if (tokens.length > 2) {
+            throw new IllegalArgumentException("Too many arguments for " + queryType.name());
+        }
+        return new Query(queryType, queryKey, null);
+
+    }
 }

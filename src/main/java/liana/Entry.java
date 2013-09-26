@@ -31,4 +31,19 @@ public class Entry {
     public void setTelephoneNumber(String telephoneNumber) {
         this.telephoneNumber = telephoneNumber;
     }
+
+    public static Entry parse(String line) {
+        String[] tokens = line.split(" ");
+        int n = tokens.length;
+        if (n < 2) {
+            throw new IllegalArgumentException("Some arguments are missing");
+        }
+        String telephone = tokens[n - 1];
+        StringBuilder builder = new StringBuilder(tokens[0]);
+        for (int i = 1; i < n - 1; i++) {
+            builder.append(' ');
+            builder.append(tokens[i]);
+        }
+        return new Entry(builder.toString(), telephone);
+    }
 }
