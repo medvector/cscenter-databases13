@@ -49,6 +49,9 @@ public class Query {
             throw new IllegalArgumentException("Wrong operation. Try use" +
                     " add, delete, update, get");
         }
+        if (tokens.length < 2) {
+            throw new IllegalArgumentException("Nickname is missing");
+        }
         String queryKey = tokens[1];
         if (queryType == Type.UPDATE || queryType == Type.ADD) {
             if (tokens.length < 3) {
