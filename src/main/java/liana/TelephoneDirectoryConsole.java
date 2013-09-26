@@ -1,9 +1,6 @@
 package liana;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
 
 import static liana.Query.Type.ADD;
 
@@ -16,9 +13,11 @@ import static liana.Query.Type.ADD;
  */
 public class TelephoneDirectoryConsole {
 
-    public static void main(String[] args) {
-        TelephoneDirectory telephoneDirectory = new TelephoneDirectory();
-        QueryInterpretator interpretator = new QueryInterpretator(System.in, System.out, telephoneDirectory);
+    public static void main(String[] args) throws FileNotFoundException {
+        TelephoneDirectory telephoneDirectory = TelephoneDirectory.fromFile(QueryInterpretator.DB_FILE_NAME);
+        QueryInterpretator interpretator = new QueryInterpretator(System.in, System.out,
+                telephoneDirectory, true);
         interpretator.eval();
+
     }
 }

@@ -20,7 +20,9 @@ public class QueryInterpretator {
     public QueryInterpretator(InputStream is, OutputStream os,
                               TelephoneDirectory td, boolean isSavable) {
         this.input = new BufferedReader(new InputStreamReader(is));
-        this.output = new PrintWriter(os, true);
+        if (os != null) {
+            this.output = new PrintWriter(os, true);
+        }
         this.td = td;
         this.isSavable = isSavable;
         if (isSavable) {

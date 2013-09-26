@@ -1,5 +1,9 @@
 package liana;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -42,5 +46,21 @@ public class TelephoneDirectory {
         }
         data.put(nickname, entry);
         return true;
+    }
+
+    public static TelephoneDirectory fromFile(String name) {
+        TelephoneDirectory telephoneDirectory = new TelephoneDirectory();
+        try {
+            QueryInterpretator loader = new QueryInterpretator(new FileInputStream(name), null, telephoneDirectory, false);
+            loader.eval();
+        } catch (FileNotFoundException e) {
+            File file = new File(name);
+            try {
+                file.createNewFile();
+            } catch (IOException e1) {
+                System.err.println("Can't create DB file");
+            }
+        }
+        return telephoneDirectory;
     }
 }
