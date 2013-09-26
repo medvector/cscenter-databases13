@@ -13,7 +13,18 @@ import static liana.Query.Type.ADD;
  */
 public class TelephoneDirectoryConsole {
 
+
+    private static void info() {
+        System.out.println("TELEPHONE DIRECTORY");
+        System.out.println("queries:\n"
+                + "add <nickname> <fullname> <telephone>\n"
+                + "get <nickname>\n"
+                + "update <nickname> <fullname> <telephone>\n"
+                + "delete <nickname>");
+    }
+
     public static void main(String[] args) throws FileNotFoundException {
+        info();
         TelephoneDirectory telephoneDirectory = TelephoneDirectory.fromFile(QueryInterpretator.DB_FILE_NAME);
         QueryInterpretator interpretator = new QueryInterpretator(System.in, System.out,
                 telephoneDirectory, true);

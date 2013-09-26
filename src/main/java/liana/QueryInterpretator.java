@@ -41,7 +41,8 @@ public class QueryInterpretator {
     }
 
     public void eval() {
-        print("Enter queries:");
+        print("Enter queries line by line:");
+        print("Error messages can appear");
         try {
             String line = null;
             while ((line = input.readLine()) != null) {
